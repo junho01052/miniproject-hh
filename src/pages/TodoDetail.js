@@ -4,25 +4,42 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { BsCircle } from 'react-icons/bs';
 import { FaTrashAlt } from 'react-icons/fa';
-import { AiOutlineArrowLeft } from 'react-icons/ai';
+import { PiPencilSimpleSlashBold } from 'react-icons/pi';
+import { AiOutlineArrowLeft, AiOutlineCheck } from 'react-icons/ai';
 import { RxPencil2 } from 'react-icons/rx';
+import { useState } from 'react';
+import { useQuery } from 'react-query';
+import { getTodos, getTodoDetail } from '../api/todos';
 
 const TodoDetail = () => {
-  const { id } = useParams();
+  const [editMode, setEditMode] = useState(false);
   const navigate = useNavigate();
 
-  const data = useSelector((state) => {
-    return state.todos.lists;
-  });
+  const onClickEditIcon = () => {
+    setEditMode(!editMode);
+  };
 
-  const foundData = data.find((item) => {
-    return item.id === id.trim('');
-  });
+  const { id } = useParams();
+  //   console.log(typeof Number(id));
+
+  const { isLoading, isError, data, error } = useQuery('todos', getTodos);
+  //   console.log('data=', data);
+
+  const foundData = data?.find((item) => item.listId === Number(id));
+  console.log(foundData);
+
+  if (isLoading) {
+    return <h1>Loading...</h1>;
+  }
+
+  if (isError) {
+    return <h1>{error}</h1>;
+  }
 
   return (
     <StTodoDetail>
       <img src={bg2} alt='background2' />
-      {foundData && (
+      {!editMode && (
         <>
           <StBox>
             <AiOutlineArrowLeft onClick={() => navigate(-1)} className='backIcon' size='30' />
@@ -37,7 +54,28 @@ const TodoDetail = () => {
           <StBoxOverlay>
             <div className='title'>
               <div>{foundData.title}</div>
-              <RxPencil2 size='35' color='#5421b4' />
+              <RxPencil2 onClick={() => onClickEditIcon()} size='35' color='#5421b4' cursor='pointer' />
+            </div>
+            <div className='content'>{foundData.content}</div>
+          </StBoxOverlay>
+        </>
+      )}
+      {editMode && (
+        <>
+          <StBox>
+            <AiOutlineArrowLeft onClick={() => navigate(-1)} className='backIcon' size='30' />
+            <StBottomIconContainer>
+              <div></div>
+              <div className='icon'>
+                <BsCircle size='30' />
+                <PiPencilSimpleSlashBold onClick={() => onClickEditIcon()} size='30' />
+              </div>
+            </StBottomIconContainer>
+          </StBox>
+          <StBoxOverlay>
+            <div className='title'>
+              <div>{foundData.title}</div>
+              <AiOutlineCheck size='35' color='#5421b4' cursor='pointer' />
             </div>
             <div className='content'>{foundData.content}</div>
           </StBoxOverlay>
@@ -64,20 +102,27 @@ const StTodoDetail = styled.div`
     top: 0;
     left: 0;
   }
+
+  .icon {
+    margin: 10px 50px 20px 0px;
+    gap: 20px;
+    color: #5421b4;
+    cursor: pointer;
+  }
 `;
 
 const StBox = styled.div`
   display: flex;
   justify-content: space-between;
   position: absolute;
-  width: 1350px;
-  height: 620px;
+  width: 1700px;
+  height: 760px;
   background-color: #f9f0ff;
   border-radius: 15px;
   box-shadow: 5px 5px rgba(0, 0, 0, 0.16), 5px 5px rgba(69, 3, 85, 0.23);
 
   .backIcon {
-    margin: 15px 0px 10px 42px;
+    margin: 20px 0px 10px 50px;
     color: #5421b4;
     cursor: pointer;
   }
@@ -88,12 +133,6 @@ const StBottomIconContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
 
-  .icon {
-    margin: 10px 42px 10px 0px;
-    gap: 20px;
-    color: #5421b4;
-  }
-
   div {
     display: flex;
   }
@@ -101,8 +140,8 @@ const StBottomIconContainer = styled.div`
 
 const StBoxOverlay = styled.div`
   position: absolute;
-  width: 1180px;
-  height: 410px;
+  width: 1500px;
+  height: 510px;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 15px;
   padding: 50px;

@@ -24,7 +24,7 @@ const initialState = {
             1. TodoList CRUD 구현 및 API 통신\n
             2. FE와 BE 연결 및 배포 Test 진행\n            
             추가 목표\n
-            1. infinite scroll 구현\n
+            1. infinite scroll 구\n
             2. 로그인, 회원가입 구현\n
             3. Passport OAuth 구현`,
       isDone: false,
@@ -39,13 +39,13 @@ const initialState = {
             추가 목표\n
             1. infinite scroll 구현\n
             2. 로그인, 회원가입 구현\n
-            3. Passport OAuth 구현`,
+            3. Passport OAuth 구`,
       isDone: false,
     },
   ],
 };
 
-const todoSlice = createSlice({
+const todosSlice = createSlice({
   name: 'todos',
   initialState,
   reducers: {
@@ -67,5 +67,5 @@ const todoSlice = createSlice({
   },
 });
 
-export default todoSlice.reducer;
-export const { addItem, deleteItem, updateItem } = todoSlice.actions;
+export default todosSlice.reducer;
+export const { addItem, deleteItem, updateItem } = todosSlice.actions;

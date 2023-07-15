@@ -43,16 +43,16 @@ const StMain = styled.div`
 
   img {
     width: 100vw;
-    height: 150px;
+    height: 200px;
     min-width: 1100px;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
   }
 `;
 
 const StDate = styled.div`
   position: absolute;
-  top: 70px;
-  right: 190px;
+  top: 100px;
+  right: 300px;
   color: white;
   font-size: 15px;
   font-weight: 500;
@@ -60,8 +60,8 @@ const StDate = styled.div`
 
 const StTime = styled.div`
   position: absolute;
-  top: 90px;
-  right: 190px;
+  top: 120px;
+  right: 300px;
   color: white;
   font-size: 35px;
   font-weight: 700;
@@ -71,5 +71,5 @@ const StMainBody = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 1060px;
+  width: 1200px;
 `;

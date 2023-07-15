@@ -5,6 +5,7 @@ import { addItem } from '../../redux/modules/todos';
 import useInput from '../../hooks/useInput';
 import InputBox from './InputBox';
 import { styled } from 'styled-components';
+import axios from 'axios';
 
 const InputList = () => {
   const [title, onChangeTitle] = useInput();
@@ -19,9 +20,10 @@ const InputList = () => {
     isDone: false,
   };
 
-  const addTodo = () => {
-    dispatch(addItem(newObj));
-  };
+  // dispatch(addItem(newObj));
+  //   const addTodo = async () => {
+  //     const response = await axios.get('http://43.201.31.108/api/lists');
+  //     console.log(response);  //   };
 
   return (
     <StInputList>
@@ -35,7 +37,7 @@ const InputList = () => {
           sort='content'
         />
       </StInputBox>
-      <AddButton onClick={addTodo}>+</AddButton>
+      <AddButton>+</AddButton>
     </StInputList>
   );
 };
@@ -46,7 +48,7 @@ const StInputList = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 40px;
+  margin-bottom: 80px;
   width: 100%;
 `;
 

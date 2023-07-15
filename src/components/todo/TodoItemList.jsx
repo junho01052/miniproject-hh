@@ -1,17 +1,23 @@
 import TodoItem from './TodoItem';
-import { useSelector } from 'react-redux';
 import { styled } from 'styled-components';
+import { getTodos } from '../../api/todos';
+import { useQuery } from 'react-query';
 
 const TodoItemList = () => {
-  const data = useSelector((state) => {
-    // console.log(state);
-    return state.todos.lists;
-  });
+  const { isLoading, isError, data, error } = useQuery('todos', getTodos);
+
+  if (isLoading) {
+    return <h1>Loading...</h1>;
+  }
+
+  if (isError) {
+    return <h1>{error}</h1>;
+  }
 
   return (
     <StTodoItemList>
       {data.map((todo) => {
-        return <TodoItem key={todo.id} todo={todo} />;
+        return <TodoItem key={todo.listId} todo={todo} />;
       })}
     </StTodoItemList>
   );

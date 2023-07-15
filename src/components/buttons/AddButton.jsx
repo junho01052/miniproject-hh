@@ -3,7 +3,7 @@ import { styled } from 'styled-components';
 const AddButton = ({ children, onClick }) => {
   return (
     <>
-      <StAddButton>{children}</StAddButton>
+      <StAddButton onClick={onClick}>{children}</StAddButton>
     </>
   );
 };
