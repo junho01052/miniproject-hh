@@ -6,8 +6,8 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/api/lists' element={<TodoListMain />} />
-        <Route path='/api/lists/:id' element={<TodoDetail />} />
+        <Route path='/' element={<TodoListMain />} />
+        <Route path='/detail/:id' element={<TodoDetail />} />
       </Routes>
     </BrowserRouter>
   );

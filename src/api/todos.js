@@ -7,8 +7,9 @@ const getTodos = async () => {
 };
 
 const getTodoDetail = async (listId) => {
-  console.log('id2=', listId);
-  const response = await axios.get(`http://43.201.31.108/api/lists/${listId}`);
+  // console.log('id2=', listId);
+  const response = await axios.get(`http://43.201.31.108/api/lists/detail/${listId}`);
+  console.log(response.data.list);
   return response.data.list;
 };
 

@@ -9,7 +9,7 @@ import { AiOutlineArrowLeft, AiOutlineCheck } from 'react-icons/ai';
 import { RxPencil2 } from 'react-icons/rx';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { getTodos, getTodoDetail } from '../api/todos';
+import { getTodoDetail } from '../api/todos';
 
 const TodoDetail = () => {
   const [editMode, setEditMode] = useState(false);
@@ -20,14 +20,9 @@ const TodoDetail = () => {
   };
 
   const { id } = useParams();
-  const numberId = Number(id);
 
-  //   const { isLoading, isError, data, error } = useQuery('todos', getTodoDetail(numberId));
-  const { isLoading, isError, data, error } = useQuery('todos', getTodos);
-  console.log('data=', data);
-
-  //   const foundData = data?.find((item) => item.listId === Number(id));
-  //   console.log(foundData);
+  const { isLoading, isError, data, error } = useQuery('tododetail', () => getTodoDetail(id));
+  //   console.log('data=', data);
 
   if (isLoading) {
     return <h1>Loading...</h1>;
@@ -44,13 +39,6 @@ const TodoDetail = () => {
         <>
           <StBox>
             <AiOutlineArrowLeft onClick={() => navigate(-1)} className='backIcon' size='30' />
-            <StBottomIconContainer>
-              <div></div>
-              <div className='icon'>
-                <BsCircle size='30' />
-                <FaTrashAlt size='30' />
-              </div>
-            </StBottomIconContainer>
           </StBox>
           <StBoxOverlay>
             <div className='title'>
@@ -65,18 +53,14 @@ const TodoDetail = () => {
         <>
           <StBox>
             <AiOutlineArrowLeft onClick={() => navigate(-1)} className='backIcon' size='30' />
-            <StBottomIconContainer>
-              <div></div>
-              <div className='icon'>
-                <BsCircle size='30' />
-                <PiPencilSimpleSlashBold onClick={() => onClickEditIcon()} size='30' />
-              </div>
-            </StBottomIconContainer>
           </StBox>
           <StBoxOverlay>
             <div className='title'>
               <div>{data.title}</div>
-              <AiOutlineCheck size='35' color='#5421b4' cursor='pointer' />
+              <div className='icon'>
+                <PiPencilSimpleSlashBold onClick={() => onClickEditIcon()} color='#5421b4' size='35' />
+                <AiOutlineCheck size='35' color='#5421b4' cursor='pointer' />
+              </div>
             </div>
             <div className='content'>{data.content}</div>
           </StBoxOverlay>
@@ -105,9 +89,8 @@ const StTodoDetail = styled.div`
   }
 
   .icon {
-    margin: 10px 50px 20px 0px;
-    gap: 20px;
-    color: #5421b4;
+    display: flex;
+    gap: 30px;
     cursor: pointer;
   }
 `;
@@ -126,16 +109,6 @@ const StBox = styled.div`
     margin: 20px 0px 10px 50px;
     color: #5421b4;
     cursor: pointer;
-  }
-`;
-
-const StBottomIconContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  div {
-    display: flex;
   }
 `;
 

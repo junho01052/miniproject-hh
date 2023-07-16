@@ -1,7 +1,5 @@
 import AddButton from '../buttons/AddButton';
 import { v4 as uuidv4 } from 'uuid';
-
-import { addItem } from '../../redux/modules/todos';
 import useInput from '../../hooks/useInput';
 import InputBox from './InputBox';
 import { styled } from 'styled-components';
