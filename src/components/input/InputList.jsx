@@ -1,9 +1,9 @@
 import AddButton from '../buttons/AddButton';
-import { v4 as uuidv4 } from 'uuid';
+
 import useInput from '../../hooks/useInput';
 import InputBox from './InputBox';
 import { styled } from 'styled-components';
-import axios from 'axios';
+
 import { useMutation, useQueryClient } from 'react-query';
 import { postTodo } from '../../api/todos';
 
@@ -27,11 +27,6 @@ const InputList = () => {
   const onClickAddButton = () => {
     mutate(newTodo);
   };
-
-  // dispatch(addItem(newObj));
-  //   const addTodo = async () => {
-  //     const response = await axios.get('http://43.201.31.108/api/lists');
-  //     console.log(response);  //   };
 
   return (
     <StInputList>

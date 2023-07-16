@@ -1,7 +1,6 @@
 import bg2 from '../asset/png/bg2.png';
 import { styled } from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { BsCircle } from 'react-icons/bs';
 import { FaTrashAlt } from 'react-icons/fa';
 import { PiPencilSimpleSlashBold } from 'react-icons/pi';

@@ -5,21 +5,31 @@ import { styled } from 'styled-components';
 import { BsCircle, BsCircleFill } from 'react-icons/bs';
 import { FaTrashAlt } from 'react-icons/fa';
 import { useState } from 'react';
+import { useMutation, useQueryClient } from 'react-query';
+import { deleteTodo } from '../../api/todos';
+import { updateIsDone } from '../../api/todos';
 
 const TodoItem = ({ todo }) => {
-  const [done, setDone] = useState(false);
+  const queryClient = useQueryClient();
 
-  const onClickDoneIcon = () => {
-    setDone(!done);
+  const { mutate: deleteMutaion } = useMutation(deleteTodo, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('todos');
+    },
+  });
+
+  const onClickDeleteButton = (id) => {
+    deleteMutaion(id);
   };
-  const dispatch = useDispatch();
 
-  const deleteTodo = (id) => {
-    dispatch(deleteItem(id));
-  };
+  const { mutate: updateIsDoneMutation } = useMutation(updateIsDone, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('todos');
+    },
+  });
 
-  const isDoneHandler = (id) => {
-    dispatch(updateItem(id));
+  const onClickIsDoneButton = (id) => {
+    updateIsDoneMutation(id);
   };
 
   return (
@@ -28,9 +38,9 @@ const TodoItem = ({ todo }) => {
         <StTitle>{todo.title}</StTitle>
       </StLink>
       <StIcon>
-        {!done && <BsCircle onClick={() => onClickDoneIcon()} className='icon' size='24' />}
-        {done && <BsCircleFill onClick={onClickDoneIcon} className='icon' size='24' />}
-        <FaTrashAlt className='icon' size='24' />
+        {!todo.isDone && <BsCircle onClick={() => onClickIsDoneButton(todo.listId)} className='icon' size='24' />}
+        {todo.isDone && <BsCircleFill onClick={() => onClickIsDoneButton(todo.listId)} className='icon' size='24' />}
+        <FaTrashAlt onClick={() => onClickDeleteButton(todo.listId)} className='icon' size='24' />
       </StIcon>
     </StTodoItem>
   );

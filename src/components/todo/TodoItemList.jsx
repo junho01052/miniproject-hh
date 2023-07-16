@@ -31,4 +31,5 @@ const StTodoItemList = styled.div`
   justify-content: center;
   align-items: center;
   width: 96%;
+  margin-bottom: 60px;
 `;
