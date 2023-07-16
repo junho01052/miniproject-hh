@@ -1,23 +1,33 @@
 import AddButton from '../buttons/AddButton';
 import { v4 as uuidv4 } from 'uuid';
-import { useDispatch } from 'react-redux';
+
 import { addItem } from '../../redux/modules/todos';
 import useInput from '../../hooks/useInput';
 import InputBox from './InputBox';
 import { styled } from 'styled-components';
 import axios from 'axios';
+import { useMutation, useQueryClient } from 'react-query';
+import { postTodo } from '../../api/todos';
 
 const InputList = () => {
   const [title, onChangeTitle] = useInput();
   const [content, onChangeContent] = useInput();
 
-  const dispatch = useDispatch();
+  const queryClient = useQueryClient();
 
-  const newObj = {
-    id: uuidv4(),
+  const { mutate } = useMutation(postTodo, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('todos');
+    },
+  });
+
+  const newTodo = {
     title,
     content,
-    isDone: false,
+  };
+
+  const onClickAddButton = () => {
+    mutate(newTodo);
   };
 
   // dispatch(addItem(newObj));
@@ -37,7 +47,7 @@ const InputList = () => {
           sort='content'
         />
       </StInputBox>
-      <AddButton>+</AddButton>
+      <AddButton onClick={onClickAddButton}>+</AddButton>
     </StInputList>
   );
 };

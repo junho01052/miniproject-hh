@@ -20,13 +20,14 @@ const TodoDetail = () => {
   };
 
   const { id } = useParams();
-  //   console.log(typeof Number(id));
+  const numberId = Number(id);
 
+  //   const { isLoading, isError, data, error } = useQuery('todos', getTodoDetail(numberId));
   const { isLoading, isError, data, error } = useQuery('todos', getTodos);
-  //   console.log('data=', data);
+  console.log('data=', data);
 
-  const foundData = data?.find((item) => item.listId === Number(id));
-  console.log(foundData);
+  //   const foundData = data?.find((item) => item.listId === Number(id));
+  //   console.log(foundData);
 
   if (isLoading) {
     return <h1>Loading...</h1>;
@@ -53,10 +54,10 @@ const TodoDetail = () => {
           </StBox>
           <StBoxOverlay>
             <div className='title'>
-              <div>{foundData.title}</div>
+              <div>{data.title}</div>
               <RxPencil2 onClick={() => onClickEditIcon()} size='35' color='#5421b4' cursor='pointer' />
             </div>
-            <div className='content'>{foundData.content}</div>
+            <div className='content'>{data.content}</div>
           </StBoxOverlay>
         </>
       )}
@@ -74,10 +75,10 @@ const TodoDetail = () => {
           </StBox>
           <StBoxOverlay>
             <div className='title'>
-              <div>{foundData.title}</div>
+              <div>{data.title}</div>
               <AiOutlineCheck size='35' color='#5421b4' cursor='pointer' />
             </div>
-            <div className='content'>{foundData.content}</div>
+            <div className='content'>{data.content}</div>
           </StBoxOverlay>
         </>
       )}

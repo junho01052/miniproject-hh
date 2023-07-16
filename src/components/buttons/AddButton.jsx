@@ -20,4 +20,5 @@ const StAddButton = styled.button`
   border: none;
   border-radius: 8px;
   box-shadow: 3px 3px rgba(0, 0, 0, 0.16), 3px 3px rgba(69, 3, 85, 0.23);
+  cursor: pointer;
 `;

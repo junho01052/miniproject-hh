@@ -6,10 +6,27 @@ const getTodos = async () => {
   return response.data.lists;
 };
 
-const getTodoDetail = async (id) => {
-  const response = await axios.get(`http://43.201.31.108/api/lists/${id}`);
-
-  return response.data.lists.find((item) => item.listId === id);
+const getTodoDetail = async (listId) => {
+  console.log('id2=', listId);
+  const response = await axios.get(`http://43.201.31.108/api/lists/${listId}`);
+  return response.data.list;
 };
 
-export { getTodos, getTodoDetail };
+const postTodo = async (newTodo) => {
+  axios({
+    url: `http://43.201.31.108/api/lists`,
+    method: 'POST',
+    data: newTodo,
+  })
+    .then((res) => {
+      if (res.status === 201) {
+        alert('todo만들기 성공!');
+      }
+    })
+    .catch((err) => console.log(err));
+
+  // const { data } = await axios.post(`http://43.201.31.108/api/lists`, { todo });
+  // return data;
+};
+
+export { getTodos, getTodoDetail, postTodo };
