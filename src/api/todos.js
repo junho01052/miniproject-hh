@@ -1,21 +1,23 @@
 import axios from 'axios';
 
+const URL = process.env.REACT_APP_API_URI;
+
 const getTodos = async () => {
-  const response = await axios.get(`https://hanghaemini1be.store/api/lists`);
+  const response = await axios.get(`${URL}`);
 
   return response.data.lists;
 };
 
 const getTodoDetail = async (listId) => {
   // console.log('id2=', listId);
-  const response = await axios.get(`https://hanghaemini1be.store/api/lists/detail/${listId}`);
+  const response = await axios.get(`${URL}/detail/${listId}`);
   console.log(response.data.list);
   return response.data.list;
 };
 
 const postTodo = async (newTodo) => {
   axios({
-    url: `https://hanghaemini1be.store/api/lists`,
+    url: `${URL}`,
     method: 'POST',
     data: newTodo,
   })
@@ -29,7 +31,7 @@ const postTodo = async (newTodo) => {
 
 const deleteTodo = async (id) => {
   axios({
-    url: `https://hanghaemini1be.store/api/lists/${id}`,
+    url: `${URL}/${id}`,
     method: 'DELETE',
   })
     .then((res) => {
@@ -42,7 +44,7 @@ const deleteTodo = async (id) => {
 
 const updateIsDone = async (id) => {
   axios({
-    url: `https://hanghaemini1be.store/api/lists/${id}/isDone`,
+    url: `${URL}/${id}/isDone`,
     method: 'PUT',
   })
     .then((res) => {
