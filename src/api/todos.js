@@ -9,7 +9,6 @@ const getTodos = async () => {
 };
 
 const getTodoDetail = async (listId) => {
-  // console.log('id2=', listId);
   const response = await axios.get(`${URL}/detail/${listId}`);
   console.log(response.data.list);
   return response.data.list;
