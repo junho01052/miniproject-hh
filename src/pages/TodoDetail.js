@@ -9,9 +9,13 @@ import { RxPencil2 } from 'react-icons/rx';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { getTodoDetail } from '../api/todos';
+import { useEffect } from 'react';
+import { useMutation, useQueryClient } from 'react-query';
+import { updateEditTodo } from '../api/todos';
 
 const TodoDetail = () => {
   const [editMode, setEditMode] = useState(false);
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   const onClickEditIcon = () => {
@@ -21,7 +25,47 @@ const TodoDetail = () => {
   const { id } = useParams();
 
   const { isLoading, isError, data, error } = useQuery('tododetail', () => getTodoDetail(id));
-  //   console.log('data=', data);
+  // console.log('data=', data);
+
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+
+  useEffect(() => {
+    if (data) {
+      setTitle(data.title);
+      setContent(data.content);
+    }
+  }, [data]);
+
+  const newTodo = {
+    title: title,
+    content: content,
+  };
+
+  console.log('newTodo=', newTodo);
+
+  const onChangeTitle = (e) => {
+    setTitle(e.target.value);
+  };
+  const onChangeContent = (e) => {
+    setContent(e.target.value);
+  };
+
+  const { mutate: updateEditTodoMutation } = useMutation(
+    () => {
+      updateEditTodo(id, newTodo);
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('todos');
+      },
+    }
+  );
+
+  const onClickEditCompleteButton = () => {
+    updateEditTodoMutation();
+    //muatation 매개변수 하나만
+  };
 
   if (isLoading) {
     return <h1>Loading...</h1>;
@@ -55,13 +99,18 @@ const TodoDetail = () => {
           </StBox>
           <StBoxOverlay>
             <div className='title'>
-              <div>{data.title}</div>
+              <input value={title} onChange={onChangeTitle} />
               <div className='icon'>
                 <PiPencilSimpleSlashBold onClick={() => onClickEditIcon()} color='#5421b4' size='35' />
-                <AiOutlineCheck size='35' color='#5421b4' cursor='pointer' />
+                <AiOutlineCheck
+                  size='35'
+                  color='#5421b4'
+                  cursor='pointer'
+                  onClick={() => onClickEditCompleteButton(data.listId, newTodo)}
+                />
               </div>
             </div>
-            <div className='content'>{data.content}</div>
+            <textarea value={content} onChange={onChangeContent} />
           </StBoxOverlay>
         </>
       )}

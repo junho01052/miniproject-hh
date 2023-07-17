@@ -33,7 +33,7 @@ const InputList = () => {
       <StInputBox>
         <InputBox type='text' value={title} placeholder='할 일을 추가해주세요' onChange={onChangeTitle} />
         <InputBox
-          type='text'
+          type='textarea'
           value={content}
           placeholder='내용을 추가해주세요'
           onChange={onChangeContent}

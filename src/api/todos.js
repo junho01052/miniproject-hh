@@ -1,3 +1,4 @@
+import { faTableTennisPaddleBall } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
 const URL = process.env.REACT_APP_API_URI;
@@ -55,4 +56,18 @@ const updateIsDone = async (id) => {
     .catch((err) => console.log(err));
 };
 
-export { getTodos, getTodoDetail, postTodo, deleteTodo, updateIsDone };
+const updateEditTodo = async (id, newTodo) => {
+  axios({
+    url: `${URL}/detail/${id}`,
+    method: 'PUT',
+    data: newTodo,
+  })
+    .then((res) => {
+      if (res.status === 200) {
+        alert('todoitem 수정 성공!');
+      }
+    })
+    .catch((err) => console.log(err));
+};
+
+export { getTodos, getTodoDetail, postTodo, deleteTodo, updateIsDone, updateEditTodo };
