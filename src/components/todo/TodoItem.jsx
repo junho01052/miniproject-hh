@@ -1,10 +1,7 @@
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { deleteItem, updateItem } from '../../redux/modules/todos';
 import { styled } from 'styled-components';
 import { BsCircle, BsCircleFill } from 'react-icons/bs';
 import { FaTrashAlt } from 'react-icons/fa';
-import { useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { deleteTodo } from '../../api/todos';
 import { updateIsDone } from '../../api/todos';
