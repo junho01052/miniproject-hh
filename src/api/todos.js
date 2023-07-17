@@ -1,4 +1,3 @@
-import { faTableTennisPaddleBall } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
 const URL = process.env.REACT_APP_API_URI;
