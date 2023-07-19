@@ -27,8 +27,8 @@ const TodoItemList = () => {
       })}
       <StBtnContainer>
         <button
-          className='btn'
-          disabled={currentPage <= 1}
+          className={currentPage <= 1 ? 'btn disabled' : 'btn'}
+          disabled={currentPage <= 1 ? 'disabled' : undefined}
           onClick={() => {
             setCurrentPage((previousValue) => previousValue - 1);
           }}
@@ -36,8 +36,8 @@ const TodoItemList = () => {
           Prev
         </button>
         <button
-          className='btn'
-          disabled={currentPage === data.totalPages}
+          className={currentPage === data.totalPages ? 'btn disabled' : 'btn'}
+          disabled={currentPage === data.totalPages ? 'disabled' : undefined}
           onClick={() => {
             setCurrentPage((previousValue) => previousValue + 1);
           }}
@@ -75,5 +75,10 @@ const StBtnContainer = styled.div`
     background-color: #5421b4;
     box-shadow: 3px 3px rgba(0, 0, 0, 0.16), 3px 3px rgba(69, 3, 85, 0.23);
     cursor: pointer;
+
+    &.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   }
 `;
