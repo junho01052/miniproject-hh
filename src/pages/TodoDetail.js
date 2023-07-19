@@ -106,7 +106,7 @@ const TodoDetail = () => {
                   size='35'
                   color='#5421b4'
                   cursor='pointer'
-                  onClick={() => onClickEditCompleteButton(data.listId, newTodo, token)}
+                  onClick={() => onClickEditCompleteButton(data.listId, newTodo)}
                 />
               </div>
             </div>

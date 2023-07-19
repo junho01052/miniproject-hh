@@ -51,7 +51,7 @@ const getTodoDetail = async (listId, token) => {
   return response.data.list;
 };
 
-const deleteTodo = async (id) => {
+const deleteTodo = async (id, token) => {
   axios({
     url: `${URL}/${id}`,
     method: 'DELETE',
@@ -69,7 +69,7 @@ const deleteTodo = async (id) => {
     .catch((err) => console.log(err));
 };
 
-const updateIsDone = async (id) => {
+const updateIsDone = async (id, token) => {
   axios({
     url: `${URL}/${id}/isDone`,
     method: 'PUT',
@@ -87,7 +87,7 @@ const updateIsDone = async (id) => {
     .catch((err) => console.log(err));
 };
 
-const updateEditTodo = async (id, newTodo) => {
+const updateEditTodo = async (id, newTodo, token) => {
   axios({
     url: `${URL}/detail/${id}`,
     method: 'PUT',

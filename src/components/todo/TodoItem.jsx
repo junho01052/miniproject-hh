@@ -40,7 +40,7 @@ const TodoItem = ({ todo }) => {
       <StIcon>
         {!todo.isDone && <BsCircle onClick={() => onClickIsDoneButton(todo.listId)} className='icon' size='24' />}
         {todo.isDone && <BsCircleFill onClick={() => onClickIsDoneButton(todo.listId)} className='icon' size='24' />}
-        <FaTrashAlt onClick={() => onClickDeleteButton(todo.listId, token)} className='icon' size='24' />
+        <FaTrashAlt onClick={() => onClickDeleteButton(todo.listId)} className='icon' size='24' />
       </StIcon>
     </StTodoItem>
   );
