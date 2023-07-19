@@ -5,28 +5,31 @@ import { FaTrashAlt } from 'react-icons/fa';
 import { useMutation, useQueryClient } from 'react-query';
 import { deleteTodo } from '../../api/todos';
 import { updateIsDone } from '../../api/todos';
+import { useParams } from 'react-router-dom';
 
 const TodoItem = ({ todo }) => {
+  const token = localStorage.getItem('accessToken');
   const queryClient = useQueryClient();
+  const { id } = useParams();
 
-  const { mutate: deleteMutaion } = useMutation(deleteTodo, {
+  const { mutate: deleteMutaion } = useMutation(() => deleteTodo(id, token), {
     onSuccess: () => {
       queryClient.invalidateQueries('todos');
     },
   });
 
-  const onClickDeleteButton = (id) => {
-    deleteMutaion(id);
+  const onClickDeleteButton = () => {
+    deleteMutaion();
   };
 
-  const { mutate: updateIsDoneMutation } = useMutation(updateIsDone, {
+  const { mutate: updateIsDoneMutation } = useMutation(updateIsDone(id, token), {
     onSuccess: () => {
       queryClient.invalidateQueries('todos');
     },
   });
 
-  const onClickIsDoneButton = (id) => {
-    updateIsDoneMutation(id);
+  const onClickIsDoneButton = () => {
+    updateIsDoneMutation();
   };
 
   return (
@@ -37,7 +40,7 @@ const TodoItem = ({ todo }) => {
       <StIcon>
         {!todo.isDone && <BsCircle onClick={() => onClickIsDoneButton(todo.listId)} className='icon' size='24' />}
         {todo.isDone && <BsCircleFill onClick={() => onClickIsDoneButton(todo.listId)} className='icon' size='24' />}
-        <FaTrashAlt onClick={() => onClickDeleteButton(todo.listId)} className='icon' size='24' />
+        <FaTrashAlt onClick={() => onClickDeleteButton(todo.listId, token)} className='icon' size='24' />
       </StIcon>
     </StTodoItem>
   );

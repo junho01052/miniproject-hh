@@ -16,13 +16,15 @@ const TodoDetail = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
+  const token = localStorage.getItem('accessToken');
+
   const onClickEditIcon = () => {
     setEditMode(!editMode);
   };
 
   const { id } = useParams();
 
-  const { isLoading, isError, data, error } = useQuery('tododetail', () => getTodoDetail(id));
+  const { isLoading, isError, data, error } = useQuery('tododetail', () => getTodoDetail(id, token));
   // console.log('data=', data);
 
   const [title, setTitle] = useState('');
@@ -51,7 +53,7 @@ const TodoDetail = () => {
 
   const { mutate: updateEditTodoMutation } = useMutation(
     () => {
-      updateEditTodo(id, newTodo);
+      updateEditTodo(id, newTodo, token);
     },
     {
       onSuccess: () => {
@@ -104,7 +106,7 @@ const TodoDetail = () => {
                   size='35'
                   color='#5421b4'
                   cursor='pointer'
-                  onClick={() => onClickEditCompleteButton(data.listId, newTodo)}
+                  onClick={() => onClickEditCompleteButton(data.listId, newTodo, token)}
                 />
               </div>
             </div>

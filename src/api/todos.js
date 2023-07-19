@@ -36,9 +36,9 @@ const postTodo = async (newTodo, token) => {
     .catch((err) => console.log(err));
 };
 
-const token = localStorage.getItem('accessToken');
+// const token = localStorage.getItem('accessToken');
 
-const getTodoDetail = async (listId) => {
+const getTodoDetail = async (listId, token) => {
   const response = await axios.get(`${URL}/detail/${listId}`, {
     headers: {
       Authorization: token,
