@@ -6,6 +6,10 @@ import { styled } from 'styled-components';
 import SignOutBtn from '../components/buttons/SignOutBtn';
 
 const TodoListMain = () => {
+  if (!localStorage.getItem('accessToken')) {
+    window.location.replace('/');
+  }
+
   const formattedDate = new Date().toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',

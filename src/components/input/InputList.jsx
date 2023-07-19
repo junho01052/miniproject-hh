@@ -1,11 +1,10 @@
 import AddButton from '../buttons/AddButton';
-
 import useInput from '../../hooks/useInput';
 import InputBox from './InputBox';
 import { styled } from 'styled-components';
-
 import { useMutation, useQueryClient } from 'react-query';
 import { postTodo } from '../../api/todos';
+import Swal from 'sweetalert2';
 
 const InputList = () => {
   const [title, setTitle, onChangeTitle] = useInput();
@@ -28,7 +27,7 @@ const InputList = () => {
 
   const onClickAddButton = () => {
     if (newTodo.title.length === 0 || newTodo.content.length === 0) {
-      alert('할일과 내용 모두 추가해주세요');
+      Swal.fire('할 일과 내용 모두 추가해주세요');
     }
     mutate();
     setTitle('');

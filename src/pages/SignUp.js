@@ -6,6 +6,7 @@ import signInBg from '../asset/png/signInBg.png';
 import Google from '../asset/svg/google.svg';
 import Kakao from '../asset/svg/kakao.svg';
 import Apple from '../asset/svg/apple.svg';
+import Swal from 'sweetalert2';
 
 const SignUp = () => {
   //이메일, 비밀번호 확인
@@ -15,7 +16,7 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const handleButton = async () => {
-    axios({
+    await axios({
       url: 'https://hanghaemini1be.store/api/user/signup',
       method: 'POST',
       data: {
@@ -24,10 +25,16 @@ const SignUp = () => {
       },
     })
       .then((res) => {
-        if (res.status === 201) {
-          alert('회원가입에 성공하였습니다');
-          navigate('/');
-        }
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: res.data.message,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      })
+      .then((res) => {
+        navigate('/');
       })
       .catch((err) => alert(err));
   };
@@ -35,7 +42,7 @@ const SignUp = () => {
   const emailVaidity = email.includes('@');
   const passwordValidity = password.length >= 8;
 
-  if (localStorage.getItem('access_Token')) {
+  if (localStorage.getItem('accessToken')) {
     window.location.replace('/todos');
   }
 

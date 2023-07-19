@@ -6,6 +6,7 @@ import signInBg from '../asset/png/signInBg.png';
 import Google from '../asset/svg/google.svg';
 import Kakao from '../asset/svg/kakao.svg';
 import Apple from '../asset/svg/apple.svg';
+import Swal from 'sweetalert2';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -20,9 +21,15 @@ const SignIn = () => {
 
     try {
       let response = await axios.post(`https://hanghaemini1be.store/api/user/login`, data);
-      console.log('signInresponse=', response);
+      // console.log('signInresponse=', response);
       localStorage.setItem('accessToken', response.data.Authorization);
-      alert('로그인을 성공하였습니다.');
+      await Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: '로그인 성공',
+        showConfirmButton: false,
+        timer: 1500,
+      });
       navigate('/todos');
     } catch (error) {
       if (error.status === 404) {
@@ -37,7 +44,7 @@ const SignIn = () => {
   const emailVaidity = email.includes('@');
   const passwordValidity = password.length >= 8;
 
-  if (localStorage.getItem('access_Token')) {
+  if (localStorage.getItem('accessToken')) {
     window.location.replace('/todos');
   }
 

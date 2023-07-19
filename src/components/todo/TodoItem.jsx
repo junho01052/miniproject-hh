@@ -16,7 +16,7 @@ const TodoItem = ({ todo }) => {
     },
   });
 
-  const onClickDeleteButton = () => {
+  const onClickDeleteButton = async () => {
     deleteMutaion();
   };
 

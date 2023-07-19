@@ -12,6 +12,10 @@ import { useMutation, useQueryClient } from 'react-query';
 import { updateEditTodo } from '../api/todos';
 
 const TodoDetail = () => {
+  if (!localStorage.getItem('accessToken')) {
+    window.location.replace('/');
+  }
+
   const [editMode, setEditMode] = useState(false);
   const queryClient = useQueryClient();
   const navigate = useNavigate();

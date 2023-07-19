@@ -1,19 +1,18 @@
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const URL = process.env.REACT_APP_API_URI;
 
 // const refreshToken = localStorage.getItem('refreshToken');
 
 const getTodos = async (currentPage, token) => {
-  console.log(token);
+  // console.log(token);
   const response = await axios.get(`${URL}?page=${currentPage}&pageSize=5`, {
     headers: {
       Authorization: token,
-      // accessToken: token,
-      // refreshToken: refreshToken,
     },
   });
-  console.log('getTodos response', response);
+  // console.log('getTodos response', response);
   return response.data;
 };
 
@@ -23,14 +22,19 @@ const postTodo = async (newTodo, token) => {
     method: 'POST',
     headers: {
       Authorization: token,
-      // accessToken: token,
-      // refreshToken: refreshToken,
     },
     data: newTodo,
+    // withCredentials: true,
   })
     .then((res) => {
       if (res.status === 201) {
-        alert('todo만들기 성공!');
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: '새로운 ToDo가 만들어졌어요!',
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     })
     .catch((err) => console.log(err));
@@ -47,7 +51,7 @@ const getTodoDetail = async (listId, token) => {
     },
   });
 
-  console.log(response.data.list);
+  // console.log(response.data.list);
   return response.data.list;
 };
 
@@ -63,7 +67,7 @@ const deleteTodo = async (id, token) => {
   })
     .then((res) => {
       if (res.status === 200) {
-        alert('todo삭제 성공!');
+        Swal.fire('ToDo가 성공적으로 삭제됐어요');
       }
     })
     .catch((err) => console.log(err));
@@ -81,14 +85,14 @@ const updateIsDone = async (id, token) => {
   })
     .then((res) => {
       if (res.status === 200) {
-        alert('isDone 변경 완료!!');
+        alert('ToDo 완료 상태가 변경됐어요');
       }
     })
     .catch((err) => console.log(err));
 };
 
 const updateEditTodo = async (id, newTodo, token) => {
-  axios({
+  await axios({
     url: `${URL}/detail/${id}`,
     method: 'PUT',
     headers: {
@@ -100,9 +104,10 @@ const updateEditTodo = async (id, newTodo, token) => {
   })
     .then((res) => {
       if (res.status === 200) {
-        alert('todoitem 수정 성공!');
+        alert('ToDo가 성공적으로 변경됐어요');
       }
     })
+
     .catch((err) => console.log(err));
 };
 
