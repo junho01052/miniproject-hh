@@ -9,7 +9,6 @@ const TodoItemList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const token = localStorage.getItem('accessToken');
 
-  // const queryClient = useQueryClient();
   const { isLoading, isError, data, error } = useQuery(['todos', currentPage], () => getTodos(currentPage, token));
 
   if (isLoading) {
