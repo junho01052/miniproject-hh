@@ -5,15 +5,12 @@ import { FaTrashAlt } from 'react-icons/fa';
 import { useMutation, useQueryClient } from 'react-query';
 import { deleteTodo } from '../../api/todos';
 import { updateIsDone } from '../../api/todos';
-import { useParams } from 'react-router';
 
 const TodoItem = ({ todo }) => {
   const token = localStorage.getItem('accessToken');
   const queryClient = useQueryClient();
 
-  const { id } = useParams();
-
-  const { mutate: deleteMutaion } = useMutation(() => deleteTodo(id, token), {
+  const { mutate: deleteMutaion } = useMutation(() => deleteTodo(todo.listId, token), {
     onSuccess: () => {
       queryClient.invalidateQueries('todos');
     },
@@ -23,7 +20,7 @@ const TodoItem = ({ todo }) => {
     deleteMutaion();
   };
 
-  const { mutate: updateIsDoneMutation } = useMutation(() => updateIsDone(id, token), {
+  const { mutate: updateIsDoneMutation } = useMutation(() => updateIsDone(todo.listId, token), {
     onSuccess: () => {
       queryClient.invalidateQueries('todos');
     },
