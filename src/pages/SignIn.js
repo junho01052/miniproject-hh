@@ -3,20 +3,11 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import signInBg from '../asset/png/signInBg.png';
-import { AiOutlineCheckCircle, AiFillCheckCircle } from 'react-icons/ai';
 import Google from '../asset/svg/google.svg';
 import Kakao from '../asset/svg/kakao.svg';
 import Apple from '../asset/svg/apple.svg';
-import { useCookies } from 'react-cookie';
 
 const SignIn = () => {
-  const [cookies, setCookie] = useCookies(['id']);
-  const [maintainSignIn, setMaintainSignIn] = useState(false);
-
-  const onClickMaintainSignIn = () => {
-    setMaintainSignIn(!maintainSignIn);
-  };
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   let navigate = useNavigate();
