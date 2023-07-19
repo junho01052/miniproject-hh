@@ -65,6 +65,7 @@ const TodoDetail = () => {
   const onClickEditCompleteButton = () => {
     updateEditTodoMutation();
     //muatation 매개변수 하나만
+    setEditMode(!editMode);
   };
 
   if (isLoading) {
