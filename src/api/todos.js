@@ -17,24 +17,7 @@ const getTodos = async (currentPage, token) => {
   return response.data;
 };
 
-const token = localStorage.getItem('accessToken');
-
-const getTodoDetail = async (listId) => {
-  // console.log('detail token', token);
-  const response = await axios.get(`${URL}/detail/${listId}`, {
-    headers: {
-      Authorization: token,
-      // accessToken: token,
-      // refreshToken: refreshToken,
-    },
-  });
-
-  console.log(response.data.list);
-  return response.data.list;
-};
-
-const postTodo = async (newTodo) => {
-  // console.log('post token', token);
+const postTodo = async (newTodo, token) => {
   await axios({
     url: `${URL}`,
     method: 'POST',
@@ -51,6 +34,22 @@ const postTodo = async (newTodo) => {
       }
     })
     .catch((err) => console.log(err));
+};
+
+const token = localStorage.getItem('accessToken');
+
+const getTodoDetail = async (listId) => {
+  // console.log('detail token', token);
+  const response = await axios.get(`${URL}/detail/${listId}`, {
+    headers: {
+      Authorization: token,
+      // accessToken: token,
+      // refreshToken: refreshToken,
+    },
+  });
+
+  console.log(response.data.list);
+  return response.data.list;
 };
 
 const deleteTodo = async (id) => {

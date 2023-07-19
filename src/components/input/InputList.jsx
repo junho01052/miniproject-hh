@@ -11,9 +11,11 @@ const InputList = () => {
   const [title, setTitle, onChangeTitle] = useInput();
   const [content, setContent, onChangeContent] = useInput();
 
+  const token = localStorage.getItem('accessToken');
+
   const queryClient = useQueryClient();
 
-  const { mutate } = useMutation(postTodo, {
+  const { mutate } = useMutation(() => postTodo(newTodo, token), {
     onSuccess: () => {
       queryClient.invalidateQueries('todos');
     },
@@ -28,7 +30,7 @@ const InputList = () => {
     if (newTodo.title.length === 0 || newTodo.content.length === 0) {
       alert('할일과 내용 모두 추가해주세요');
     }
-    mutate(newTodo);
+    mutate();
     setTitle('');
     setContent('');
   };
