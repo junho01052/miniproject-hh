@@ -3,6 +3,7 @@ import TodoItemList from '../components/todo/TodoItemList';
 import Layout from '../ui/Layout';
 import bg1 from '../asset/png/bg1.png';
 import { styled } from 'styled-components';
+import SignOutBtn from '../components/buttons/SignOutBtn';
 
 const TodoListMain = () => {
   const formattedDate = new Date().toLocaleDateString('en-US', {
@@ -23,6 +24,7 @@ const TodoListMain = () => {
         <img src={bg1} alt='background1' />
         <StDate>{formattedDate}</StDate>
         <StTime>{formattedTime}</StTime>
+        <SignOutBtn />
         <StMainBody>
           <InputList />
           <TodoItemList />
@@ -66,6 +68,7 @@ const StTime = styled.div`
   font-size: 35px;
   font-weight: 700;
 `;
+
 const StMainBody = styled.div`
   display: flex;
   flex-direction: column;

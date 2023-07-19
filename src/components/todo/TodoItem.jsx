@@ -31,7 +31,7 @@ const TodoItem = ({ todo }) => {
 
   return (
     <StTodoItem>
-      <StLink to={`/detail/${todo.listId}`}>
+      <StLink to={`/todos/detail/${todo.listId}`}>
         <StTitle>{todo.title}</StTitle>
       </StLink>
       <StIcon>

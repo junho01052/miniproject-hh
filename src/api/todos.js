@@ -2,22 +2,47 @@ import axios from 'axios';
 
 const URL = process.env.REACT_APP_API_URI;
 
-const getTodos = async () => {
-  const response = await axios.get(`${URL}`);
+// const refreshToken = localStorage.getItem('refreshToken');
 
-  return response.data.lists;
+const getTodos = async (currentPage, token) => {
+  console.log(token);
+  const response = await axios.get(`${URL}?page=${currentPage}&pageSize=5`, {
+    headers: {
+      Authorization: token,
+      // accessToken: token,
+      // refreshToken: refreshToken,
+    },
+  });
+  console.log('getTodos response', response);
+  return response.data;
 };
 
+const token = localStorage.getItem('accessToken');
+
 const getTodoDetail = async (listId) => {
-  const response = await axios.get(`${URL}/detail/${listId}`);
+  // console.log('detail token', token);
+  const response = await axios.get(`${URL}/detail/${listId}`, {
+    headers: {
+      Authorization: token,
+      // accessToken: token,
+      // refreshToken: refreshToken,
+    },
+  });
+
   console.log(response.data.list);
   return response.data.list;
 };
 
 const postTodo = async (newTodo) => {
-  axios({
+  // console.log('post token', token);
+  await axios({
     url: `${URL}`,
     method: 'POST',
+    headers: {
+      Authorization: token,
+      // accessToken: token,
+      // refreshToken: refreshToken,
+    },
     data: newTodo,
   })
     .then((res) => {
@@ -32,6 +57,11 @@ const deleteTodo = async (id) => {
   axios({
     url: `${URL}/${id}`,
     method: 'DELETE',
+    headers: {
+      Authorization: token,
+      // accessToken: token,
+      // refreshToken: refreshToken,
+    },
   })
     .then((res) => {
       if (res.status === 200) {
@@ -45,6 +75,11 @@ const updateIsDone = async (id) => {
   axios({
     url: `${URL}/${id}/isDone`,
     method: 'PUT',
+    headers: {
+      Authorization: token,
+      // accessToken: token,
+      // refreshToken: refreshToken,
+    },
   })
     .then((res) => {
       if (res.status === 200) {
@@ -58,6 +93,11 @@ const updateEditTodo = async (id, newTodo) => {
   axios({
     url: `${URL}/detail/${id}`,
     method: 'PUT',
+    headers: {
+      Authorization: token,
+      // accessToken: token,
+      // refreshToken: refreshToken,
+    },
     data: newTodo,
   })
     .then((res) => {

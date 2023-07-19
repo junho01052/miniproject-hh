@@ -183,4 +183,33 @@ const StBoxOverlay = styled.div`
     border-top: 1px solid #2e0350;
     padding-top: 30px;
   }
+
+  input {
+    width: 80%;
+    height: 50px;
+    margin-top: 15px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid #d9b0fc;
+    border-radius: 6px;
+    /* box-shadow: 3px 3px rgba(0, 0, 0, 0.16), 3px 3px rgba(69, 3, 85, 0.23); */
+    font-size: 27px;
+    font-weight: 800;
+    color: #2e0350;
+    padding-left: 20px;
+  }
+
+  textarea {
+    width: 80%;
+    height: 70%;
+    margin-top: 15px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid #d9b0fc;
+    border-radius: 6px;
+    color: #2e0350;
+    padding-left: 20px;
+    white-space: pre-line;
+    font-size: 18px;
+    font-weight: 400;
+    padding-top: 30px;
+  }
 `;

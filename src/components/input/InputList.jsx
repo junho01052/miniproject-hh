@@ -8,8 +8,8 @@ import { useMutation, useQueryClient } from 'react-query';
 import { postTodo } from '../../api/todos';
 
 const InputList = () => {
-  const [title, onChangeTitle] = useInput();
-  const [content, onChangeContent] = useInput();
+  const [title, setTitle, onChangeTitle] = useInput();
+  const [content, setContent, onChangeContent] = useInput();
 
   const queryClient = useQueryClient();
 
@@ -25,7 +25,12 @@ const InputList = () => {
   };
 
   const onClickAddButton = () => {
+    if (newTodo.title.length === 0 || newTodo.content.length === 0) {
+      alert('할일과 내용 모두 추가해주세요');
+    }
     mutate(newTodo);
+    setTitle('');
+    setContent('');
   };
 
   return (
@@ -33,7 +38,7 @@ const InputList = () => {
       <StInputBox>
         <InputBox type='text' value={title} placeholder='할 일을 추가해주세요' onChange={onChangeTitle} />
         <InputBox
-          type='textarea'
+          type='text'
           value={content}
           placeholder='내용을 추가해주세요'
           onChange={onChangeContent}
