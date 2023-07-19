@@ -42,7 +42,7 @@ const TodoDetail = () => {
     content: content,
   };
 
-  console.log('newTodo=', newTodo);
+  // console.log('newTodo=', newTodo);
 
   const onChangeTitle = (e) => {
     setTitle(e.target.value);
