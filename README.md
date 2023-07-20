@@ -1,6 +1,7 @@
-# (LeeEoPark TODO) Mini-Project 1 Team Front-end
+# LeeEoPark TODO  <img src="./public/logo.png" width="40" height="40"/> 
+Mini-Project 1 Team Front-end
 
-## 배포링크(http://mini-project-jay.s3-website.ap-northeast-2.amazonaws.com/)
+## [배포링크](http://mini-project-jay.s3-website.ap-northeast-2.amazonaws.com/)
 
 ## 구현
 
