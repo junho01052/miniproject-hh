@@ -94,6 +94,14 @@ const TodoDetail = () => {
               <RxPencil2 onClick={() => onClickEditIcon()} size='35' color='#5421b4' cursor='pointer' />
             </div>
             <div className='content'>{data.content}</div>
+            <StTimeContainer>
+              <div>
+                Create <span>{data.createdAt}</span>
+              </div>
+              <div>
+                Update <span>{data.updatedAt}</span>
+              </div>
+            </StTimeContainer>
           </StBoxOverlay>
         </>
       )}
@@ -152,11 +160,13 @@ const StBox = styled.div`
   display: flex;
   justify-content: space-between;
   position: absolute;
-  width: 1700px;
-  height: 760px;
+  width: 80vw;
+  min-width: 700px;
+  height: 65vh;
+  min-height: 350px;
   background-color: #f9f0ff;
   border-radius: 15px;
-  box-shadow: 5px 5px rgba(0, 0, 0, 0.16), 5px 5px rgba(69, 3, 85, 0.23);
+  box-shadow: 9px 9px rgba(0, 0, 0, 0.16), 13px 13px rgba(0, 0, 0, 0.16);
 
   .backIcon {
     margin: 20px 0px 10px 50px;
@@ -167,8 +177,9 @@ const StBox = styled.div`
 
 const StBoxOverlay = styled.div`
   position: absolute;
-  width: 1500px;
-  height: 510px;
+  width: 70vw;
+  min-width: 550px;
+  height: 45vh;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 15px;
   padding: 50px;
@@ -218,5 +229,18 @@ const StBoxOverlay = styled.div`
     font-size: 18px;
     font-weight: 400;
     padding-top: 30px;
+  }
+`;
+
+const StTimeContainer = styled.div`
+  position: absolute;
+  bottom: 30px;
+  right: 50px;
+  font-size: 13px;
+  color: #2e0350;
+
+  span {
+    font-weight: 250;
+    font-size: 12px;
   }
 `;

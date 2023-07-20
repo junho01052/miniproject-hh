@@ -78,5 +78,6 @@ const StMainBody = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 1200px;
+  width: 65vw;
+  min-width: 700px;
 `;
