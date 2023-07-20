@@ -162,7 +162,7 @@ const StBox = styled.div`
   position: absolute;
   width: 80vw;
   min-width: 700px;
-  height: 65vh;
+  height: 70vh;
   min-height: 350px;
   background-color: #f9f0ff;
   border-radius: 15px;
@@ -179,7 +179,7 @@ const StBoxOverlay = styled.div`
   position: absolute;
   width: 70vw;
   min-width: 550px;
-  height: 45vh;
+  height: 40vh;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 15px;
   padding: 50px;
