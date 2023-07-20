@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 # LeeEoPark TODO  <img src="./public/logo.png" width="40" height="40"/> 
 Mini-Project 1 Team Front-end
 
@@ -20,4 +18,3 @@ Mini-Project 1 Team Front-end
 - Axios
 - Styled-Components
 - React-Router-Dom
->>>>>>> 8f34230d6278590b3deffb456865f064b7d5ec0d
